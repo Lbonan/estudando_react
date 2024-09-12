@@ -1,10 +1,27 @@
+import { useEffect } from "react";
 import { useState } from "react";
 
 const Formulario = () => {
-  let [materiaA, setmateriaA] = useState(0);
-  let [materiaB, setmateriaB] = useState(0);
-  let [materiaC, setmateriaC] = useState(0);
-  let [nome, setNome] = useState("");
+  const [materiaA, setmateriaA] = useState(0);
+  const [materiaB, setmateriaB] = useState(0);
+  const [materiaC, setmateriaC] = useState(0);
+  const [nome, setNome] = useState("");
+
+  useEffect(() => {
+    console.log("o componente iniciou");
+
+    return () => {
+      console.log("O compente finalizou");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log("As notas das matérias mudaram: " + "A: " + materiaA + "B: " + materiaB + "C: " + materiaC);
+  }, [materiaA, materiaB, materiaC]);
+
+  useEffect(() => {
+    console.log("O estado nome mudou");
+  }, [nome]);
 
   const alteraNome = (ev) => {
     setNome((estadoAnterior) => {
@@ -15,8 +32,6 @@ const Formulario = () => {
   const renderizaResultado = () => {
     const soma = materiaA + materiaB + materiaC;
     const media = Math.floor(soma / 3);
-    console.log(soma);
-    console.log(media);
 
     if (media >= 7) {
       return <p>Olá {nome}, você foi aprovado</p>;
